@@ -1,0 +1,55 @@
+services:
+    mariadb:
+        image: 'mariadb:11'
+        ports:
+            - '${FORWARD_DB_PORT:-3306}:3306'
+        container_name: test-task-mariadb
+        environment:
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ROOT_HOST: '%'
+            MYSQL_DATABASE: '${DB_DATABASE}'
+            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_PASSWORD: '${DB_PASSWORD}'
+        volumes:
+            - 'test-task-data:/var/lib/mysql'
+        networks:
+            - test-task
+
+    app:
+        build:
+            context: .
+            dockerfile: docker/containers/app/Dockerfile
+        image: test-task
+        container_name: test-task-app
+        restart: unless-stopped
+        tty: true
+        working_dir: /var/www/html
+        volumes:
+            - ./:/var/www/html
+            - ./docker/containers/app/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+            - ~/.ssh:/home/user/.ssh:ro
+        depends_on:
+            - mariadb
+        networks:
+            - test-task
+
+    nginx:
+        image: nginx:stable
+        container_name: test-task-nginx
+        restart: unless-stopped
+        volumes:
+            - ./:/var/www/html
+            - ./docker/containers/nginx:/etc/nginx/conf.d
+        ports:
+            - "${FORWARD_APP_PORT:-8000}:80"
+        depends_on:
+            - app
+        networks:
+            - test-task
+
+networks:
+    test-task:
+        driver: bridge
+
+volumes:
+    test-task-data:
