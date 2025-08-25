@@ -40,8 +40,8 @@ RUN docker-php-ext-install \
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
-#RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
+#RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
+RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
 
 COPY . /var/www/html
 
