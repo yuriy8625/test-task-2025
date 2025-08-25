@@ -1,0 +1,14 @@
+#!/usr/bin/env php
+
+<?php
+
+use Core\Support\Env;
+
+require __DIR__ . '/vendor/autoload.php';
+
+try {
+    $handler = new Core\Console\ConsoleHandler($argv);
+    $handler->run();
+} catch (Exception $e) {
+    echo $e->getMessage() . PHP_EOL;
+}

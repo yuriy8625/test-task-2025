@@ -1,0 +1,8 @@
+.env
+auth.json
+/.idea
+/.vscode
+.composer
+.config
+.bash_history
+vendor

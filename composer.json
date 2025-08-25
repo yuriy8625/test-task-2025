@@ -1,0 +1,37 @@
+{
+    "name": "kernytskyi/skelar",
+    "description": "A custom PHP MVC framework",
+    "type": "project",
+    "version": "1.0.0",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Core\\": "src/Core",
+            "App\\": "app/",
+            "Database\\Migrations\\": "database/migrations/",
+            "Database\\Seeder\\": "database/seeders/"
+        },
+        "files": []
+    },
+    "authors": [
+        {
+            "name": "Kernytskyi",
+            "email": "ykernytskyi@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "ext-pdo": "*"
+    },
+    "require-dev": {},
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "console": "php console"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    }
+}
