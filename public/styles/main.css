@@ -79,8 +79,8 @@ main {
     border-color: #001f5b;
 }
 
-/* Sale page */
-.sale {
+/* Catalog page */
+.catalog {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -88,18 +88,18 @@ main {
     flex-wrap: wrap;
 }
 
-.sale .material-icons {
+.catalog .material-icons {
     font-size: 1.5rem;
     vertical-align: middle;
     color: #f44336;
 }
 
-.sale--title {
+.catalog--title {
     font-size: 1.25rem;
     font-weight: 600;
 }
 
-.sale--timer {
+.catalog--timer {
     font-weight: 700;
     letter-spacing: .03em;
     font-variant-numeric: tabular-nums;
@@ -110,12 +110,12 @@ main {
     border: 1px solid #dfe7ff;
 }
 
-.sale--description {
+.catalog--description {
     font-size: 1.1rem;
     line-height: 1.5;
     color: #333;
 }
-/* End sale page */
+/* End catalog page */
 
 /* Products */
 .products {
@@ -238,6 +238,28 @@ main {
 }
 /* End footer*/
 
+/* Diagram */
+.payment-diagram {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    column-count: 1;
+}
+.payment-diagram h1 {
+    font-size: 1.8rem;
+    margin: 1rem auto;
+}
+
+.payment-diagram img {
+    width: 100vw;
+    height: 90vh;
+}
+
+.payment-diagram a {
+    margin: 1rem auto;
+}
+/* End Diagram */
+
 /* ===== Mobile adaptation ===== */
 @media (max-width: 600px) {
     .container {
@@ -264,7 +286,7 @@ main {
         max-width: 100%;
     }
 
-    .sale--timer {
+    .catalog--timer {
         padding: .35rem .6rem;
     }
 

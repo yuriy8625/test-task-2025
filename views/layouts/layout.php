@@ -25,7 +25,5 @@
     include_once __DIR__ . '/../partials/footer.php';
 ?>
 
-
-<script src="./scripts/index.js"></script>
 </body>
 </html>

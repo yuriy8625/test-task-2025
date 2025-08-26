@@ -12,16 +12,16 @@ class ProductController extends Controller
     /**
      * @throws \Exception
      */
-    public function index(): string
+    public function catalog(): string
     {
-         return View::render('products/index');
+         return View::render('products/catalog');
     }
 
     /**
      * @throws \Exception
      */
-    public function catalog(): string
+    public function sale(): string
     {
-        return View::render('products/catalog');
+        return View::render('products/sale');
     }
 }
