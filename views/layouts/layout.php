@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.prod.website-files.com/63f5f9fd64b1330b28a07cac/63fdfc1c3e4e4de9ffdae05a_Frame%2024.png" rel="shortcut icon" type="image/x-icon">
     <title><?= \Core\Support\Config::getInstance()->get('app.app_name', 'Title') ?></title>
 
     <!--  Fonts  -->
