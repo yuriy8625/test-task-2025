@@ -9,6 +9,8 @@ class PaginationDTO extends DTO
     public function __construct(
         readonly array $items = [],
         readonly int $total = 0,
+        readonly int $page = 1,
+        readonly int $limit = 10,
     )
     {
 
@@ -19,6 +21,8 @@ class PaginationDTO extends DTO
         return new self(
             $data['items'] ?? [],
             $data['total'] ?? 0,
+            $data['page'] ?? 1,
+            $data['limit'] ?? 10,
         );
     }
 }

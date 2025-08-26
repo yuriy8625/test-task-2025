@@ -4,24 +4,31 @@ namespace App\Controllers\Api;
 
 use App\Services\Product\Actions\ImportProductsAction;
 use App\Services\Product\DTO\ProductDTO;
+use App\Services\Product\DTO\ProductFilterDTO;
+use App\Services\Product\Repository\ProductRepository;
 use Core\Controller\Controller;
-use Core\Database\DB;
+use Core\Support\DataTransferObject\DB\PaginationDTO;
+use Core\Support\Env;
 use Core\Support\Response;
 
 class ProductController extends Controller
 {
     public function index(): string
     {
-        $pdo = DB::getInstance()->getConnection();
-        $sort = $_GET['sort'] ?? 'title';
-        $page = (int)($_GET['page'] ?? 1);
-        $limit = 10;
-        $offset = ($page - 1) * $limit;
+        try {
+            $productRepo = new ProductRepository();
+            $data = $this->app->request()->input(default: []);
+            $filter = ProductFilterDTO::fromArray($data);
 
-        $stmt = $pdo->query("SELECT * FROM products ORDER BY $sort LIMIT $limit OFFSET $offset");
-        $products = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            $products = $productRepo->filter($filter);
+            $count = $productRepo->count();
 
-        return Response::json($products, 200);
+            $result = new PaginationDTO($products, $count, $filter->page, $filter->limit);
+
+            return Response::json($result->toArray(), 200);
+        } catch (\Throwable $th) {
+            return Response::json(['error' => 'Bad Request'], 400);
+        }
     }
 
     /**

@@ -36,7 +36,7 @@ class Env
 
     public static function get(string $key, $default = null): bool|array|string
     {
-        return getenv($key);
+        return getenv($key) ?: $default;
     }
 
     public static function all(): array
