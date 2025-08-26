@@ -29,11 +29,18 @@ class Env
 
         foreach ($config as $name => $value) {
             putenv("$name=$value");
+            $_ENV[$name] = $value;
+            $_SERVER[$name] = $value;
         }
     }
 
     public static function get(string $key, $default = null): bool|array|string
     {
         return getenv($key);
+    }
+
+    public static function all(): array
+    {
+        return getenv();
     }
 }

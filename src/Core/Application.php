@@ -23,6 +23,7 @@ class Application
         $this->env = Env::getInstance();
 
         $this->startSession();
+        $this->debug();
         $this->router = new Router();
         $this->request = new Request();
         $this->response = new Response();
@@ -37,6 +38,17 @@ class Application
 
     private function __clone()
     {
+    }
+
+    protected function debug(): void
+    {
+        if (getenv('APP_DEBUG')) {
+            ini_set('display_errors', 1);
+            error_reporting(E_ALL);
+        } else {
+            ini_set('display_errors', 0);
+            error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT);
+        }
     }
 
     public static function getInstance(): Application

@@ -6,22 +6,41 @@ use Core\Support\Config;
 
 class View
 {
+    protected static string $layout = 'layouts/layout';
+
     /**
-     * @throws \Exception
+     * Змінити layout
+     */
+    public static function setLayout(string $layout): void
+    {
+        self::$layout = $layout;
+    }
+
+    /**
+     * @throws \RuntimeException
      */
     public static function render(string $view, array $params = []): string
     {
-        extract($params);
+        $viewPath   = Config::getInstance()->get('app.view_path');
+        $viewFile   = "{$viewPath}/{$view}.php";
+        $layoutFile = "{$viewPath}/" . self::$layout . ".php";
 
-        $file = Config::getInstance()->get('app.view_path') . "/{$view}.php";
-        if (!file_exists($file)) {
-            throw new \Exception("View {$view} not found");
+        if (!file_exists($viewFile)) {
+            throw new \RuntimeException("View not found: {$viewFile}");
         }
 
+        if (!file_exists($layoutFile)) {
+            throw new \RuntimeException("Layout not found: {$layoutFile}");
+        }
+
+        extract($params, EXTR_SKIP);
+
         ob_start();
-        include $file;
+        include $viewFile;
         $content = ob_get_clean();
 
-        return include Config::getInstance()->get('app.view_path') . '/layouts/layout.php';
+        ob_start();
+        include $layoutFile;
+        return ob_get_clean();
     }
 }

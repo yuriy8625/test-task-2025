@@ -85,8 +85,6 @@ class Router
             }
         }
 
-
-
         echo Response::text('404 Not Found', 404);
     }
 }
